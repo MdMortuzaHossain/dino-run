@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="bn"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dino • Crystal Rush</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#09151b;color:#e6fff6}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0,#164338,transparent 60%),#09151b;min-height:100vh}main{max-width:1100px;margin:auto;padding:28px 20px}header{display:flex;align-items:center;justify-content:space-between;gap:20px}.eyebrow{color:#8feab8;letter-spacing:4px;font-size:12px}h1{font-size:clamp(30px,5vw,54px);margin:8px 0}h1 span{color:#a6f76c}p{color:#afc9c0;line-height:1.7}.badge{border:1px solid #446653;padding:10px 16px;border-radius:30px;font-size:12px;white-space:nowrap}.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 14px}.stat{padding:12px 16px;background:#13292a;border:1px solid #2a4541;border-radius:12px}.stat small{display:block;color:#9cbab0;font-size:11px;letter-spacing:1px}.stat b{font-size:22px}.arena{position:relative;border:1px solid #466d5b;border-radius:18px;overflow:hidden;box-shadow:0 25px 80px #0006}canvas{display:block;width:100%;aspect-ratio:1000/420;touch-action:none;background:#133336}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#071c25bb;padding:15px}.panel{text-align:center;max-width:540px}.panel h2{font-size:clamp(22px,4vw,40px);margin:8px}.panel p{margin:10px 0}.hidden{display:none!important}button{font:inherit;background:#b1f575;color:#10291e;border:0;border-radius:10px;padding:12px 22px;font-weight:750;cursor:pointer;touch-action:manipulation}button:hover{filter:brightness(1.1)}button.secondary{background:#233e3b;color:#e1f9ea;border:1px solid #4e7263}.controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin:14px 0}.controls div{display:flex;gap:8px}.progress{height:5px;background:#29413e}.progress i{display:block;height:100%;background:#aff777;width:0}.info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}.info article{border-top:1px solid #345047;padding-top:14px}.info b{color:#c7f49b}.info p{font-size:13px}.status{min-height:24px;color:#bdf78c;font-size:13px}footer{font-size:12px;color:#76948a;margin-top:24px}@media(max-width:600px){main{padding:18px 12px}.badge{display:none}.hud{gap:6px}.stat{padding:9px}.stat b{font-size:17px}.info{grid-template-columns:1fr}.panel p{font-size:12px}.panel h2{font-size:23px}canvas{aspect-ratio:1000/550}.controls button{padding:12px 14px}}
+</style>
+<main><header><div><div class="eyebrow">A LITTLE DINO. A BIG ADVENTURE.</div><h1>Dino <span>Crystal Rush</span></h1></div><div class="badge">৬ মিনিট • ৫ জগৎ • অসংখ্য লাফ</div></header>
+<p>জাদুর স্ফটিক কুড়াও, বিপদ টপকাও, আর ডাইনোটিকে বাড়ি পৌঁছে দাও।</p>
+<div class="hud"><div class="stat"><small>সময় / TIME</small><b id="time">0:00 / 6:00</b></div><div class="stat"><small>স্ফটিক / CRYSTALS</small><b id="score">0</b></div><div class="stat"><small>শক্তি / ENERGY</small><b id="hp">♥ ♥ ♥ ♥ ♥</b></div><div class="stat"><small>জগৎ / WORLD</small><b id="world">Emerald Grove</b></div></div>
+<div class="arena"><canvas id="game" width="1000" height="420" aria-label="Dinosaur runner. Use Space to jump, Down to duck, and P to pause."></canvas><div class="overlay" id="overlay"><div class="panel"><div class="eyebrow">THE CRYSTAL TRAIL</div><h2 id="title">ছোট্ট ডাইনোর বড় অভিযান</h2><p id="message">Space / ↑ দিয়ে লাফ, আবার চাপলে ডাবল জাম্প। ↓ ধরে নিচু হও। ৫টি জগৎ পেরিয়ে ৬ মিনিটে বাড়ি পৌঁছাও। শক্তি শেষ হলেও checkpoint থেকে আবার খেলতে পারবে।</p><button id="start">অভিযান শুরু →</button></div></div><div class="progress"><i id="progress"></i></div></div>
+<div class="controls"><div><button id="jump">↑ লাফ / Jump</button><button id="duck" class="secondary">↓ নিচু / Duck</button></div><div><button id="pause" class="secondary">Ⅱ বিরতি</button><button id="sound" class="secondary" aria-pressed="false">♪ Sound off</button></div></div>
+<div class="status" id="status" aria-live="polite">সেরা স্কোর: <span id="best">0</span> • প্রস্তুত?</div>
+<div class="info"><article><b>01 / FIND YOUR RHYTHM</b><p>ক্যাকটাসে লাফ দাও, উড়ন্ত পাখির নিচে ঝুঁকো। ডাবল জাম্প বাঁচিয়ে রাখো উঁচু বাধার জন্য।</p></article><article><b>02 / A LITTLE MAGIC</b><p>নীল ঢাল একবারের আঘাত আটকায়। গোলাপি হৃদয় শক্তি ফেরায়। সোনালি চুম্বক স্ফটিক টেনে আনে।</p></article><article><b>03 / KEEP EXPLORING</b><p>প্রতি ৭২ সেকেন্ডে নতুন জগৎ ও checkpoint। শেষে বিজয়; চাইলে Endless মোডে আরও খেলো। P দিয়ে বিরতি।</p></article></div><footer>Original canvas artwork • No downloads • No tracking • Keyboard & touch friendly</footer></main>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d');
+const worlds=[['Emerald Grove','#153f39','#65b89a','#b2f87a'],['Golden Dunes','#563e32','#dba769','#ffe28a'],['Twilight Peaks','#292d56','#7f86cb','#ceadff'],['Crystal Cavern','#143747','#64b7cb','#89f5ef'],['Aurora Home','#173e37','#74c2a7','#b9ff95']];
+let best=0;try{best=Number(localStorage.getItem('crystal-rush-best'))||0}catch{}
+$('best').textContent=best;
+let s,held=false,muted=true,audio;
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function reset(checkpoint=0,score=0){s={t:checkpoint,score,hp:5,y:0,vy:0,jumps:0,duck:false,objects:[],particles:[],spawn:1.5,power:7,shield:0,magnet:0,inv:2,phase:'running',distance:0,endless:false,checkpoint,checkpointScore:score,combo:0};held=false}
+function beep(freq){if(muted)return;try{audio??=new(window.AudioContext||window.webkitAudioContext)();audio.resume();let o=audio.createOscillator(),g=audio.createGain();o.connect(g);g.connect(audio.destination);o.frequency.value=freq;g.gain.setValueAtTime(.04,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.12);o.start();o.stop(audio.currentTime+.12)}catch{}}
+function jump(){if(!s||s.phase!=='running')return;if(s.jumps<2){s.vy=-(s.jumps?540:620);s.jumps++;s.duck=false;beep(380+s.jumps*90)}}
+function duck(v){held=v;if(s)s.duck=v&&s.y===0}
+function overlay(title,msg,label){$('title').textContent=title;$('message').textContent=msg;$('start').textContent=label;$('overlay').classList.remove('hidden')}
+function play(){if(!s)reset();else if(s.phase==='paused'){s.phase='running'}else if(s.phase==='lost'){reset(s.checkpoint,s.checkpointScore)}else if(s.phase==='won'){s.endless=true;s.phase='running';s.hp=5;s.inv=3}else reset();$('overlay').classList.add('hidden')}
+$('start').onclick=play;$('jump').onclick=jump;
+$('duck').onpointerdown=e=>{e.preventDefault();$('duck').setPointerCapture(e.pointerId);duck(true)};
+$('duck').onpointerup=$('duck').onpointercancel=()=>duck(false);
+function pause(){if(!s)return;if(s.phase==='running'){s.phase='paused';duck(false);overlay('একটু বিশ্রাম','আপনার অভিযান এখানেই অপেক্ষা করছে।','আবার খেলি →')}else if(s.phase==='paused')play()}
+$('pause').onclick=pause;
+$('sound').onclick=()=>{muted=!muted;$('sound').textContent=muted?'♪ Sound off':'♪ Sound on';$('sound').setAttribute('aria-pressed',String(!muted));beep(600)};
+document.addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='Space'||e.code==='ArrowUp'){if(!s)play();else jump()}if(e.code==='ArrowDown')duck(true);if(e.code==='KeyP'||e.code==='Escape')pause()});
+document.addEventListener('keyup',e=>{if(e.code==='ArrowDown')duck(false)});
+window.addEventListener('blur',()=>{duck(false);if(s?.phase==='running')pause()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&s?.phase==='running')pause()});
+canvas.onpointerdown=e=>{e.preventDefault();jump()};
+function particles(x,y,color){for(let i=0;i<10;i++)s.particles.push({x,y,vx:rnd(-80,80),vy:rnd(-130,30),life:.6,color})}
+function finish(won){s.phase=won?'won':'lost';best=Math.max(best,Math.floor(s.score));try{localStorage.setItem('crystal-rush-best',String(best))}catch{}overlay(won?'বাড়ি পৌঁছেছি! ✨':'আবার চেষ্টা করা যাক!',won?'৬ মিনিটের অভিযান সম্পূর্ণ! স্ফটিক: '+Math.floor(s.score)+' • সেরা: '+best+'। Endless মোডে আরও দূরে যাও।':'স্ফটিক: '+Math.floor(s.score)+'। শেষ checkpoint থেকে পূর্ণ শক্তি নিয়ে আবার শুরু করো।',won?'Endless অভিযান →':'Checkpoint থেকে শুরু →')}
+function update(dt){
+if(!s||s.phase!=='running')return;
+s.t+=dt;s.distance+=dt*(260+Math.min(s.t/3,130));
+let stage=Math.min(4,Math.floor(s.t/72));
+if(!s.endless&&s.t>=360){finish(true);return}
+if(stage*72>s.checkpoint){s.checkpoint=stage*72;s.checkpointScore=s.score;s.hp=Math.min(5,s.hp+1);s.inv=3;particles(150,210,'#fff');}
+s.inv=Math.max(0,s.inv-dt);s.shield=Math.max(0,s.shield-dt);s.magnet=Math.max(0,s.magnet-dt);
+s.vy+=1550*dt;s.y=Math.max(0,s.y-s.vy*dt);if(s.y===0){s.vy=0;s.jumps=0}s.duck=held&&s.y===0;
+const speed=260+Math.min(s.t/3,130);s.spawn-=dt;s.power-=dt;
+if(s.spawn<=0){let bird=Math.random()<.3&&s.t>20;s.objects.push({type:bird?'bird':'rock',x:1040,y:bird?40:0,w:bird?48:30,h:bird?26:rnd(38,62)});for(let i=0;i<5;i++)s.objects.push({type:'gem',x:1100+i*36,y:115+Math.sin(i/4*Math.PI)*50,w:18,h:18});s.spawn=rnd(1.65,2.4)}
+if(s.power<=0){let type=['shield','heart','magnet'][Math.floor(Math.random()*3)];s.objects.push({type,x:1050,y:65,w:26,h:26});s.power=rnd(10,14)}
+let ph=s.duck?25:52,px=135,py=342-s.y-ph;
+for(const o of s.objects){o.x-=speed*dt;let oy=342-o.y-o.h;if(o.type==='gem'&&s.magnet>0&&Math.abs(o.x-px)<160){o.x+=(px-o.x)*dt*9;o.y+=(s.y+30-o.y)*dt*9;oy=342-o.y-o.h}
+if(!o.hit&&px+30>o.x+4&&px+4<o.x+o.w-4&&py+ph>oy+4&&py<oy+o.h-4){o.hit=true;
+if(['rock','bird'].includes(o.type)){if(s.inv===0){if(s.shield>0){s.shield=0}else{s.hp--;s.combo=0}s.inv=2;beep(130);particles(px,py,'#ff8c8c');if(s.hp<=0){finish(false);return}}}
+else{if(o.type==='gem'){s.combo++;s.score+=10+(s.combo>=10?5:0);beep(800)}if(o.type==='heart')s.hp=Math.min(5,s.hp+1);if(o.type==='shield')s.shield=15;if(o.type==='magnet')s.magnet=12;particles(o.x,oy,'#befb88')}}
+} s.objects=s.objects.filter(o=>o.x>-80&&!o.hit);
+for(const p of s.particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=300*dt;p.life-=dt}s.particles=s.particles.filter(p=>p.life>0);
+}
+function draw(){
+let t=s?.t||0,stage=Math.min(4,Math.floor(t/72)),w=worlds[stage],d=s?.distance||0;
+ctx.fillStyle=w[1];ctx.fillRect(0,0,1000,420);
+ctx.fillStyle=w[3];ctx.globalAlpha=.8;ctx.beginPath();ctx.arc(815,84,35,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+for(let layer=0;layer<3;layer++){ctx.fillStyle=[w[2],w[1],w[2]][layer];ctx.globalAlpha=[.15,.6,.25][layer];for(let i=-1;i<8;i++){let x=i*200-(d*(.08+layer*.08)%200);ctx.beginPath();ctx.moveTo(x,342);ctx.lineTo(x+100,130+layer*48+Math.sin(i)*25);ctx.lineTo(x+230,342);ctx.fill()}}ctx.globalAlpha=1;
+ctx.fillStyle='#0b2427';ctx.fillRect(0,342,1000,78);ctx.fillStyle=w[3];ctx.fillRect(0,342,1000,3);
+ctx.globalAlpha=.35;for(let i=0;i<24;i++)ctx.fillRect((i*51-d*.6%51),367+(i%3)*14,18,2);ctx.globalAlpha=1;
+for(const o of s?.objects||[]){let y=342-o.y-o.h;ctx.fillStyle=w[3];
+if(o.type==='rock'){ctx.fillStyle='#e08d78';ctx.fillRect(o.x+8,y,16,o.h);ctx.fillRect(o.x,y+14,o.w,9);ctx.fillRect(o.x,y+6,6,18);ctx.fillRect(o.x+26,y+1,6,22)}
+else if(o.type==='bird'){ctx.fillStyle='#f4b794';ctx.beginPath();ctx.moveTo(o.x,y+12);ctx.lineTo(o.x+20,y+Math.sin(t*14)*12);ctx.lineTo(o.x+28,y+14);ctx.lineTo(o.x+45,y+6);ctx.lineTo(o.x+34,y+26);ctx.fill()}
+else{ctx.fillStyle={gem:'#bef78b',heart:'#ff9fb9',shield:'#86d9ff',magnet:'#ffda82'}[o.type];ctx.save();ctx.translate(o.x+o.w/2,y+o.h/2);ctx.rotate(o.type==='gem'?Math.PI/4:0);ctx.fillRect(-o.w/2,-o.h/2,o.w,o.h);ctx.fillStyle='#173b33';if(o.type!=='gem'){ctx.font='bold 17px system-ui';ctx.textAlign='center';ctx.fillText({heart:'♥',shield:'S',magnet:'M'}[o.type],0,6)}else ctx.fillRect(-3,-6,3,9);ctx.restore()}}
+let y=342-(s?.y||0),ducking=s?.duck;
+ctx.save();ctx.translate(135,y);if(s?.inv>0&&Math.floor(t*12)%2)ctx.globalAlpha=.5;
+if(s?.shield>0){ctx.strokeStyle='#8cdeff';ctx.lineWidth=3;ctx.beginPath();ctx.arc(18,-25,44,0,Math.PI*2);ctx.stroke()}
+ctx.fillStyle='#b7fa7f';ctx.fillRect(0,ducking?-24:-42,29,ducking?20:34);ctx.fillRect(17,ducking?-26:-55,29,24);ctx.fillRect(-15,ducking?-16:-26,19,10);ctx.fillRect(-21,ducking?-21:-31,8,10);ctx.fillRect(27,-17,13,6);
+ctx.fillStyle='#102b28';ctx.fillRect(35,ducking?-22:-50,5,5);ctx.fillRect(31,ducking?-9:-34,15,3);
+ctx.fillStyle='#b7fa7f';let run=s?.phase==='running'&&s.y===0?Math.sin(t*18)*5:0;ctx.fillRect(2,-9,7,10+run);ctx.fillRect(20,-9,7,10-run);ctx.restore();
+for(const p of s?.particles||[]){ctx.globalAlpha=p.life/.6;ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,5,5)}ctx.globalAlpha=1;
+$('time').textContent=Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')+(s?.endless?' ∞':' / 6:00');$('world').textContent=w[0];$('score').textContent=Math.floor(s?.score||0);$('hp').textContent='♥ '.repeat(s?.hp??5);$('progress').style.width=Math.min(100,t/360*100)+'%';
+if(s)$('status').textContent='সেরা: '+best+' • Checkpoint '+Math.floor(s.checkpoint/72)+' / 4'+(s.shield>0?' • Shield '+Math.ceil(s.shield)+'s':'')+(s.magnet>0?' • Magnet '+Math.ceil(s.magnet)+'s':'')+(s.combo>=10?' • Combo bonus!':'');
+}
+let last=0;function frame(now){let dt=Math.min(.033,(now-last)/1000||0);last=now;update(dt);draw();requestAnimationFrame(frame)}requestAnimationFrame(frame);
+</script></html>
