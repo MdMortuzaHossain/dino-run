@@ -5,7 +5,7 @@
 </style>
 <main><header><div><div class="eyebrow">A LITTLE DINO. A BIG ADVENTURE.</div><h1>Dino <span>Crystal Rush</span></h1></div><div class="badge">৬ মিনিট • ৫ জগৎ • অসংখ্য লাফ</div></header>
 <p>জাদুর স্ফটিক কুড়াও, বিপদ টপকাও, আর ডাইনোটিকে বাড়ি পৌঁছে দাও।</p>
-<div class="hud"><div class="stat"><small>সময় / TIME</small><b id="time">0:00 / 6:00</b></div><div class="stat"><small>স্ফটিক / CRYSTALS</small><b id="score">0</b></div><div class="stat"><small>শক্তি / ENERGY</small><b id="hp">♥ ♥ ♥ ♥ ♥</b></div><div class="stat"><small>জগৎ / WORLD</small><b id="world">Emerald Grove</b></div></div>
+<div class="hud"><div class="stat"><small>সময় / TIME</small><b id="time">0:00 / 6:00</b></div><div class="stat"><small>স্ফটিক / CRYSTALS</small><b id="score">0</b></div><div class="stat"><small>লাইফলাইন / LIVES</small><b id="hp" style="font-size:clamp(12px,2vw,20px)">♥ ♥ ♥ ♥ ♥ · 5/5</b></div><div class="stat"><small>জগৎ / WORLD</small><b id="world">Emerald Grove</b></div></div>
 <div class="arena"><canvas id="game" width="1000" height="420" aria-label="Dinosaur runner. Use Space to jump, Down to duck, and P to pause."></canvas><div class="overlay" id="overlay"><div class="panel"><div class="eyebrow">THE CRYSTAL TRAIL</div><h2 id="title">ছোট্ট ডাইনোর বড় অভিযান</h2><p id="message">Space / ↑ দিয়ে লাফ, আবার চাপলে ডাবল জাম্প। ↓ ধরে নিচু হও। ৫টি জগৎ পেরিয়ে ৬ মিনিটে বাড়ি পৌঁছাও। শক্তি শেষ হলেও checkpoint থেকে আবার খেলতে পারবে।</p><button id="start">অভিযান শুরু →</button></div></div><div class="progress"><i id="progress"></i></div></div>
 <div class="controls"><div><button id="jump">↑ লাফ / Jump</button><button id="duck" class="secondary">↓ নিচু / Duck</button></div><div><button id="pause" class="secondary">Ⅱ বিরতি</button><button id="sound" class="secondary" aria-pressed="false">♪ Sound off</button></div></div>
 <div class="status" id="status" aria-live="polite">সেরা স্কোর: <span id="best">0</span> • প্রস্তুত?</div>
@@ -150,7 +150,7 @@ ctx.fillStyle='#b7fa7f';ctx.fillRect(0,ducking?-24:-42,29,ducking?20:34);ctx.fil
 ctx.fillStyle='#102b28';ctx.fillRect(35,ducking?-22:-50,5,5);ctx.fillRect(31,ducking?-9:-34,15,3);
 ctx.fillStyle='#b7fa7f';let run=s?.phase==='running'&&s.y===0?Math.sin(t*18)*5:0;ctx.fillRect(2,-9,7,10+run);ctx.fillRect(20,-9,7,10-run);ctx.restore();
 for(const p of s?.particles||[]){ctx.globalAlpha=p.life/.6;ctx.fillStyle=p.color;ctx.fillRect(p.x,p.y,5,5)}ctx.globalAlpha=1;
-$('time').textContent=Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')+(s?.endless?' ∞':' / 6:00');$('world').textContent=w[0];$('score').textContent=Math.floor(s?.score||0);$('hp').textContent='♥ '.repeat(s?.hp??5);$('progress').style.width=Math.min(100,t/360*100)+'%';
+$('time').textContent=Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0')+(s?.endless?' ∞':' / 6:00');$('world').textContent=w[0];$('score').textContent=Math.floor(s?.score||0);const lives=Math.max(0,Math.min(5,s?.hp??5));$('hp').textContent='♥ '.repeat(lives)+'♡ '.repeat(5-lives)+'· '+lives+'/5';$('hp').setAttribute('aria-label',lives+' of 5 lives remaining');$('progress').style.width=Math.min(100,t/360*100)+'%';
 if(s)$('status').textContent='সেরা: '+best+' • Checkpoint '+Math.floor(s.checkpoint/72)+' / 4'+(s.shield>0?' • Shield '+Math.ceil(s.shield)+'s':'')+(s.magnet>0?' • Magnet '+Math.ceil(s.magnet)+'s':'')+(s.combo>=10?' • Combo bonus!':'');
 }
 let last=0;function frame(now){let dt=Math.min(.033,(now-last)/1000||0);last=now;update(dt);draw();requestAnimationFrame(frame)}requestAnimationFrame(frame);
