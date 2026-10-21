@@ -1,5 +1,9 @@
 # Dino Run
 
+## [▶ Play Dino Run](https://mdmortuzahossain.github.io/dino-run/dist/)
+
+Click the link above, then press **Start running**. No download needed.
+
 A small, original pixel-art dinosaur endless runner, inspired by the classic offline browser game. Built with vanilla HTML, CSS and JavaScript. No build tools needed.
 
 ## Play
